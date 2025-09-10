@@ -1,0 +1,8 @@
+# ignore .o files
+*.o
+
+# ignore final
+final
+
+# Standard C ignore
+a.out
