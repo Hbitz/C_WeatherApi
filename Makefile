@@ -9,7 +9,7 @@ all: final
 #    commands
 
 final: $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o final 
+	$(CC) $(FLAGS) $(OBJS) -o final -lcurl
 
 main.o: main.c
 	$(CC) $(FLAGS) -c main.c -o main.o
