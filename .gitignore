@@ -1,9 +1,23 @@
-# test
-# ignore .o files
+# Kompilerade objektfiler
 *.o
 
-# ignore final
+# Dependency-filer från kompilering (-MMD)
+*.d
+
+# Vanliga C-utdata
+a.out
+
+# Final binär om du fortfarande använder det namnet
 final
 
-# Standard C ignore
-a.out
+# Build-mapp (allt i den)
+build/
+
+# VS Code
+.vscode/
+
+# Mac/Unix skräpfiler
+.DS_Store
+
+# Backup-filer
+*~
