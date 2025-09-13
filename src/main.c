@@ -14,7 +14,7 @@ size_t got_data(char *buffer, size_t itemsize, size_t nitems, void* ignore)
     return bytes;
 }
 */
-size_t result;
+http result;
 
 int main()
 {         
@@ -47,12 +47,27 @@ int main()
         printf("URL: \"%s\"\r\n", url);
         printf("Now trying to use curl\n");
 
-        if (!http_get(url, &result)) {
+        // http_get returns 0 if succesfull, or other negative number for different kinds of errors
+        // in C, 0 = success, nonzero = failure
+        // However, evaluating if(express) with 0 in C returns false.
+        if (http_get(url, &result)) {
             printf("HTTP GET request failed\n");
             continue; // start over
         }
 
-        // // // 
+        if (result.data == NULL) {
+            printf("Buffer is NULL!\n");
+        } else {
+            printf("Buffer has %lu bytes\n", (unsigned long)result.size);
+        }
+
+
+        // If we get here, the get request was successfully.
+        printf("Now printing data...\n");
+        printf("%s\n", result.data);
+        
+
+        // // // // 
         // CURL *curl = curl_easy_init();
 
         // if (!curl) {
