@@ -6,14 +6,6 @@
 #include "http.h"
 #include <curl/curl.h>
 
-/*
-size_t got_data(char *buffer, size_t itemsize, size_t nitems, void* ignore)
-{
-    size_t bytes = itemsize * nitems;
-    printf("New data (%zu bytes)\n", bytes);
-    return bytes;
-}
-*/
 http result;
 
 int main()
@@ -61,36 +53,10 @@ int main()
             printf("Buffer has %lu bytes\n", (unsigned long)result.size);
         }
 
-
         // If we get here, the get request was successfully.
         printf("Now printing data...\n");
         printf("%s\n", result.data);
-        
-
-        // // // // 
-        // CURL *curl = curl_easy_init();
-
-        // if (!curl) {
-        //     printf("curl init failed\n");
-        //     return EXIT_FAILURE;
-        // }
-
-        // // set options
-        //  curl_easy_setopt(curl, CURLOPT_URL, url);
-        //  // By default it prints out to terminal.
-        //  // But here we set a callback function "got_data"
-        //  //curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, got_data);
-
-        //  // perform out action
-        //  CURLcode result = curl_easy_perform(curl);
-        //  if (result != CURLE_OK)
-        //  {
-        //     printf("ERROR\n");
-        //  }
-        //  //printf("%s", got_data);
-
-        //  curl_easy_cleanup(curl);
-        
+                
     }
     
     return 0;
