@@ -3,7 +3,7 @@
 #include <string.h>
 #include <locale.h>
 #include "weather.h"
-
+#include "http.h"
 #include <curl/curl.h>
 
 /*
@@ -14,6 +14,7 @@ size_t got_data(char *buffer, size_t itemsize, size_t nitems, void* ignore)
     return bytes;
 }
 */
+size_t result;
 
 int main()
 {         
@@ -46,29 +47,34 @@ int main()
         printf("URL: \"%s\"\r\n", url);
         printf("Now trying to use curl\n");
 
-        // 
-        CURL *curl = curl_easy_init();
-
-        if (!curl) {
-            printf("curl init failed\n");
-            return EXIT_FAILURE;
+        if (!http_get(url, &result)) {
+            printf("HTTP GET request failed\n");
+            continue; // start over
         }
 
-        // set options
-         curl_easy_setopt(curl, CURLOPT_URL, url);
-         // By default it prints out to terminal.
-         // But here we set a callback function "got_data"
-         //curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, got_data);
+        // // // 
+        // CURL *curl = curl_easy_init();
 
-         // perform out action
-         CURLcode result = curl_easy_perform(curl);
-         if (result != CURLE_OK)
-         {
-            printf("ERROR\n");
-         }
-         //printf("%s", got_data);
+        // if (!curl) {
+        //     printf("curl init failed\n");
+        //     return EXIT_FAILURE;
+        // }
 
-         curl_easy_cleanup(curl);
+        // // set options
+        //  curl_easy_setopt(curl, CURLOPT_URL, url);
+        //  // By default it prints out to terminal.
+        //  // But here we set a callback function "got_data"
+        //  //curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, got_data);
+
+        //  // perform out action
+        //  CURLcode result = curl_easy_perform(curl);
+        //  if (result != CURLE_OK)
+        //  {
+        //     printf("ERROR\n");
+        //  }
+        //  //printf("%s", got_data);
+
+        //  curl_easy_cleanup(curl);
         
     }
     
